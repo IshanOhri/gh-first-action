@@ -1,8 +1,8 @@
 name: GitHub Context Object & Expressions
 on: workflow_dispatch
 jobs:
-  output:
+  info:
     runs-on: ubuntu-latest
     steps:
-      - name: Get github object metadata
-        run: echo "${{ toJson(github) }}"
+      - name: Get GitHub object metadata
+        run: echo "${{ toJSON(github) }}"
