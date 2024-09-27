@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get github object metadata
-        run: echo "${{ to_json(github) }}"
+        run: echo "${{ toJson(github) }}"
