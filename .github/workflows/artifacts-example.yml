@@ -1,4 +1,4 @@
-name: Artifact/Output Sample Workflow
+name: Upload & Download Sample Workflow
 on:
   push:
     branches:
@@ -27,12 +27,19 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-files
-          path: |
-            dist
-            package.json
+          path: dist
+          # path: |
+          #   dist
+          #   package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+            name: dist-files
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: Deploy
         run: echo "deploying..."
