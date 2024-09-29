@@ -1,0 +1,34 @@
+name: Event Trigger Demo
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - main #main
+      - 'dev-*' # dev-new, dev-any
+      - 'feat/**' # feat/new, feat/new/button
+  workflow_dispatch:
+  push:
+    branches:
+      - main #main
+      - 'dev-*' # dev-new, dev-any
+      - 'feat/**' # feat/new, feat/new/button
+    paths-ignore:
+      - '.github/workflows/*'
+jobs:
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18    
+      - name: Install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: Deploy
+        run: echo "deploying..."
